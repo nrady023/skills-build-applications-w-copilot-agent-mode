@@ -1,0 +1,254 @@
+.App {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding-bottom: 3rem;
+}
+
+/* Navbar Styling */
+.navbar {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(90deg, #333 0%, #555 100%) !important;
+  margin-bottom: 2rem;
+}
+
+.navbar-brand {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #fff !important;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-brand:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+.nav-link {
+  margin-left: 1.5rem !important;
+  margin-right: 0.5rem;
+  padding: 0.5rem 0 !important;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  color: #61dafb !important;
+  border-bottom-color: #61dafb;
+}
+
+/* Container and Card Styling */
+.container {
+  max-width: 1200px;
+}
+
+.card {
+  border: none;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 2rem;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  padding: 1.25rem;
+  border-radius: 0.75rem 0.75rem 0 0 !important;
+}
+
+.card-header h4 {
+  font-weight: bold;
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+/* Table Styling */
+.table {
+  margin-bottom: 0;
+}
+
+.table thead {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(97, 218, 251, 0.1);
+  cursor: pointer;
+}
+
+.table td {
+  vertical-align: middle;
+  padding: 0.75rem;
+}
+
+.table-light {
+  background-color: #f8f9fa;
+}
+
+/* Badge Styling */
+.badge {
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Alert Styling */
+.alert {
+  border-radius: 0.5rem;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+}
+
+.alert-danger {
+  background-color: #fee;
+  color: #c33;
+  border-left: 4px solid #c33;
+}
+
+.alert-info {
+  background-color: #efe;
+  color: #3c3;
+  border-left: 4px solid #3c3;
+}
+
+.alert-warning {
+  background-color: #ffeaa7;
+  color: #b8a107;
+  border-left: 4px solid #b8a107;
+}
+
+/* Spinner Styling */
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+}
+
+/* Typography */
+h1, h2, h4 {
+  color: #333;
+  font-weight: bold;
+}
+
+.lead {
+  color: #666;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+p {
+  color: #555;
+  line-height: 1.6;
+}
+
+strong {
+  color: #333;
+  font-weight: 600;
+}
+
+a {
+  color: #61dafb;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #4fa8ee;
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar-brand {
+    font-size: 1.4rem;
+  }
+
+  .nav-link {
+    margin-left: 0 !important;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-header {
+    flex-direction: column;
+  }
+
+  .d-flex {
+    flex-direction: column !important;
+  }
+
+  .align-items-center {
+    align-items: flex-start !important;
+  }
+
+  .badge {
+    display: inline-block;
+    margin-top: 0.5rem;
+  }
+}
+
+/* Table Responsive */
+.table-responsive {
+  border-radius: 0.5rem;
+}
+
+.table-responsive table {
+  width: 100%;
+}
+
+/* Button Styling */
+.btn {
+  border-radius: 0.5rem;
+  font-weight: 600;
+  padding: 0.5rem 1.25rem;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-close {
+  transition: color 0.3s ease;
+}
+
+.btn-close:hover {
+  color: #c33 !important;
+}
+
+/* Home Page Styling */
+.home-container {
+  text-align: center;
+  padding: 3rem 0;
+}
+
+.home-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.home-container .lead {
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+}
+

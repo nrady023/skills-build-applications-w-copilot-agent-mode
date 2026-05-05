@@ -31,14 +31,21 @@ router.register(r'workouts', views.WorkoutViewSet)
 @api_view(['GET'])
 def api_root(request, format=None):
     # Build absolute URIs for API endpoints with proper domain from environment variable
-    codespace_name = os.environ.get('CODESPACE_NAME', 'localhost')
+    codespace_name = os.environ.get('CODESPACE_NAME')
+    
+    if codespace_name:
+        # Use codespace URL format: https://$CODESPACE_NAME-8000.app.github.dev
+        base_url = f'https://{codespace_name}-8000.app.github.dev/api'
+    else:
+        # Fall back to request-based URL for localhost
+        base_url = request.build_absolute_uri('/api')
     
     return Response({
-        'users': request.build_absolute_uri('users/'),
-        'teams': request.build_absolute_uri('teams/'),
-        'activities': request.build_absolute_uri('activities/'),
-        'leaderboard': request.build_absolute_uri('leaderboard/'),
-        'workouts': request.build_absolute_uri('workouts/'),
+        'users': f'{base_url}/users/',
+        'teams': f'{base_url}/teams/',
+        'activities': f'{base_url}/activities/',
+        'leaderboard': f'{base_url}/leaderboard/',
+        'workouts': f'{base_url}/workouts/',
     })
 
 urlpatterns = [

@@ -76,7 +76,7 @@ const Workouts = () => {
   return (
     <div className="container mt-5 mb-5">
       <div className="card">
-        <div className="card-header bg-info text-white">
+        <div className="card-header" style={{background: 'linear-gradient(135deg, #06b6d4 0%, #0891b2 100%)', color: 'white'}}>
           <div className="d-flex justify-content-between align-items-center">
             <h4 className="mb-0">💪 Workouts</h4>
             <span className="badge bg-light text-dark">{workouts.length} total</span>

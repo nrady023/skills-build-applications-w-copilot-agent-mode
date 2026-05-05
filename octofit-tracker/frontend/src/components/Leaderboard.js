@@ -74,7 +74,7 @@ const Leaderboard = () => {
   return (
     <div className="container mt-5 mb-5">
       <div className="card">
-        <div className="card-header bg-danger text-white">
+        <div className="card-header" style={{background: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)', color: 'white'}}>
           <div className="d-flex justify-content-between align-items-center">
             <h4 className="mb-0">🏆 Leaderboard</h4>
             <span className="badge bg-light text-dark">{leaderboard.length} total</span>

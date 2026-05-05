@@ -67,9 +67,9 @@ const Activities = () => {
   return (
     <div className="container mt-5 mb-5">
       <div className="card">
-        <div className="card-header bg-warning text-dark">
+        <div className="card-header" style={{background: 'linear-gradient(135deg, #f97316 0%, #d97706 100%)', color: 'white'}}>
           <div className="d-flex justify-content-between align-items-center">
-            <h4 className="mb-0">Activities</h4>
+            <h4 className="mb-0">📊 Activities</h4>
             <span className="badge bg-light text-dark">{activities.length} total</span>
           </div>
         </div>

@@ -11,12 +11,9 @@ const Activities = () => {
 
   const fetchActivities = async () => {
     try {
-      const codespace = process.env.REACT_APP_CODESPACE_NAME || 'localhost:3000';
-      const protocol = process.env.REACT_APP_CODESPACE_NAME ? 'https' : 'http';
-      const backendPort = process.env.REACT_APP_CODESPACE_NAME
-        ? '8000.app.github.dev'
-        : ':8000';
-      const apiUrl = `${protocol}://${codespace}-${backendPort}/api/activities/`;
+      const apiUrl = process.env.REACT_APP_CODESPACE_NAME
+        ? `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev/api/activities/`
+        : `http://localhost:8000/api/activities/`;
 
       console.log('Fetching Activities from:', apiUrl);
 

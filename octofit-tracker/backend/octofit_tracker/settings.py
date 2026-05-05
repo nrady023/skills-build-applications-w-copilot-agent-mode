@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,8 +27,13 @@ SECRET_KEY = 'django-insecure-d)kt28#6p8y(_zm8xd8h#*7h@70g)^ty*c^d2-&xi+7nd-@fmo
 DEBUG = True
 
 
-# Allow all hosts for development
-ALLOWED_HOSTS = ['*']
+# Configure allowed hosts for localhost and GitHub Codespace
+CODESPACE_NAME = os.environ.get('CODESPACE_NAME', 'localhost')
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    f'{CODESPACE_NAME}-8000.app.github.dev',
+]
 
 
 # Application definition
@@ -61,6 +67,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'octofit_tracker.urls'
+
+# HTTPS and SSL Support for GitHub Codespace
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 TEMPLATES = [
     {

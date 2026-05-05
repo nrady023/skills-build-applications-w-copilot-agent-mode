@@ -11,12 +11,9 @@ const Leaderboard = () => {
 
   const fetchLeaderboard = async () => {
     try {
-      const codespace = process.env.REACT_APP_CODESPACE_NAME || 'localhost:3000';
-      const protocol = process.env.REACT_APP_CODESPACE_NAME ? 'https' : 'http';
-      const backendPort = process.env.REACT_APP_CODESPACE_NAME
-        ? '8000.app.github.dev'
-        : ':8000';
-      const apiUrl = `${protocol}://${codespace}-${backendPort}/api/leaderboard/`;
+      const apiUrl = process.env.REACT_APP_CODESPACE_NAME
+        ? `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev/api/leaderboard/`
+        : `http://localhost:8000/api/leaderboard/`;
 
       console.log('Fetching Leaderboard from:', apiUrl);
 
@@ -29,7 +26,6 @@ const Leaderboard = () => {
       const data = await response.json();
       console.log('Leaderboard data fetched:', data);
 
-      // Handle both paginated responses and plain arrays
       const leaderboardList = data.results || data;
       setLeaderboard(Array.isArray(leaderboardList) ? leaderboardList : []);
       setLoading(false);
@@ -97,37 +93,30 @@ const Leaderboard = () => {
             </span>
           </div>
         </div>
+
         <div className="card-body">
           {leaderboard.length === 0 ? (
             <div className="alert alert-info mb-0" role="alert">
-              <strong>No leaderboard data found</strong> - Currently there are no
-              entries.
+              <strong>No leaderboard data found</strong> - Currently there are no entries.
             </div>
           ) : (
             <div className="table-responsive">
               <table className="table table-hover table-striped mb-0">
                 <thead className="table-light">
                   <tr>
-                    <th scope="col" style={{ width: '80px' }}>
-                      Rank
-                    </th>
-                    <th scope="col">User</th>
-                    <th scope="col" style={{ width: '120px' }}>
-                      Score
-                    </th>
-                    <th scope="col" style={{ width: '120px' }}>
-                      Points
-                    </th>
+                    <th>Rank</th>
+                    <th>User</th>
+                    <th>Score</th>
+                    <th>Points</th>
                   </tr>
                 </thead>
+
                 <tbody>
                   {leaderboard.map((entry, index) => {
                     const rank = index + 1;
+
                     return (
-                      <tr
-                        key={entry.id}
-                        className={rank <= 3 ? 'table-highlighted' : ''}
-                      >
+                      <tr key={entry.id || index}>
                         <td>
                           <span className={`badge ${getRankBadge(rank)}`}>
                             {rank === 1
@@ -140,16 +129,19 @@ const Leaderboard = () => {
                             #{rank}
                           </span>
                         </td>
+
                         <td>
                           <strong>
                             {entry.user || entry.username || 'N/A'}
                           </strong>
                         </td>
+
                         <td>
                           <span className="badge bg-info text-dark">
                             {entry.score || 'N/A'}
                           </span>
                         </td>
+
                         <td>
                           <span className="badge bg-success">
                             {entry.points || 'N/A'}
@@ -159,6 +151,7 @@ const Leaderboard = () => {
                     );
                   })}
                 </tbody>
+
               </table>
             </div>
           )}

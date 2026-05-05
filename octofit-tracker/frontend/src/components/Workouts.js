@@ -11,15 +11,9 @@ const Workouts = () => {
 
   const fetchWorkouts = async () => {
     try {
-      const codespace =
-        process.env.REACT_APP_CODESPACE_NAME || 'localhost:3000';
-      const protocol = process.env.REACT_APP_CODESPACE_NAME
-        ? 'https'
-        : 'http';
-      const backendPort = process.env.REACT_APP_CODESPACE_NAME
-        ? '8000.app.github.dev'
-        : ':8000';
-      const apiUrl = `${protocol}://${codespace}-${backendPort}/api/workouts/`;
+      const apiUrl = process.env.REACT_APP_CODESPACE_NAME
+        ? `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev/api/workouts/`
+        : `http://localhost:8000/api/workouts/`;
 
       console.log('Fetching Workouts from:', apiUrl);
 
@@ -44,12 +38,12 @@ const Workouts = () => {
 
   const getIntensityBadge = (intensity) => {
     if (!intensity) return 'bg-secondary';
+
     const lower = intensity.toLowerCase();
     if (lower.includes('high') || lower.includes('intense')) return 'bg-danger';
-    if (lower.includes('medium') || lower.includes('moderate'))
-      return 'bg-warning text-dark';
-    if (lower.includes('low') || lower.includes('light'))
-      return 'bg-info text-dark';
+    if (lower.includes('medium') || lower.includes('moderate')) return 'bg-warning text-dark';
+    if (lower.includes('low') || lower.includes('light')) return 'bg-info text-dark';
+
     return 'bg-secondary';
   };
 
@@ -103,23 +97,24 @@ const Workouts = () => {
             </span>
           </div>
         </div>
+
         <div className="card-body">
           {workouts.length === 0 ? (
             <div className="alert alert-info mb-0" role="alert">
-              <strong>No workouts found</strong> - Currently there are no
-              workouts in the system.
+              <strong>No workouts found</strong> - Currently there are no workouts in the system.
             </div>
           ) : (
             <div className="table-responsive">
               <table className="table table-hover table-striped mb-0">
                 <thead className="table-light">
                   <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Workout Type</th>
-                    <th scope="col">Duration (minutes)</th>
-                    <th scope="col">Intensity</th>
+                    <th>ID</th>
+                    <th>Workout Type</th>
+                    <th>Duration (minutes)</th>
+                    <th>Intensity</th>
                   </tr>
                 </thead>
+
                 <tbody>
                   {workouts.map((workout) => (
                     <tr key={workout.id}>
@@ -128,32 +123,33 @@ const Workouts = () => {
                           {workout.id}
                         </span>
                       </td>
+
                       <td>
                         <strong>
                           {workout.workout_type || 'N/A'}
                         </strong>
                       </td>
+
                       <td>
                         <span className="badge bg-primary">
                           {workout.duration || 'N/A'}
                         </span>
                       </td>
+
                       <td>
-                        <span
-                          className={`badge ${getIntensityBadge(
-                            workout.intensity
-                          )}`}
-                        >
+                        <span className={`badge ${getIntensityBadge(workout.intensity)}`}>
                           {workout.intensity || 'N/A'}
                         </span>
                       </td>
                     </tr>
                   ))}
                 </tbody>
+
               </table>
             </div>
           )}
         </div>
+
       </div>
     </div>
   );

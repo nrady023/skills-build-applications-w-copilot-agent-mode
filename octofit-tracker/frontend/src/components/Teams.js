@@ -11,15 +11,9 @@ const Teams = () => {
 
   const fetchTeams = async () => {
     try {
-      const codespace =
-        process.env.REACT_APP_CODESPACE_NAME || 'localhost:3000';
-      const protocol = process.env.REACT_APP_CODESPACE_NAME
-        ? 'https'
-        : 'http';
-      const backendPort = process.env.REACT_APP_CODESPACE_NAME
-        ? '8000.app.github.dev'
-        : ':8000';
-      const apiUrl = `${protocol}://${codespace}-${backendPort}/api/teams/`;
+      const apiUrl = process.env.REACT_APP_CODESPACE_NAME
+        ? `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev/api/teams/`
+        : `http://localhost:8000/api/teams/`;
 
       console.log('Fetching Teams from:', apiUrl);
 
@@ -92,22 +86,23 @@ const Teams = () => {
             </span>
           </div>
         </div>
+
         <div className="card-body">
           {teams.length === 0 ? (
             <div className="alert alert-info mb-0" role="alert">
-              <strong>No teams found</strong> - Currently there are no teams in
-              the system.
+              <strong>No teams found</strong> - Currently there are no teams in the system.
             </div>
           ) : (
             <div className="table-responsive">
               <table className="table table-hover table-striped mb-0">
                 <thead className="table-light">
                   <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Team Name</th>
-                    <th scope="col">Description</th>
+                    <th>ID</th>
+                    <th>Team Name</th>
+                    <th>Description</th>
                   </tr>
                 </thead>
+
                 <tbody>
                   {teams.map((team) => (
                     <tr key={team.id}>
@@ -116,9 +111,13 @@ const Teams = () => {
                           {team.id}
                         </span>
                       </td>
+
                       <td>
-                        <strong>{team.name || team.team_name}</strong>
+                        <strong>
+                          {team.name || team.team_name || 'N/A'}
+                        </strong>
                       </td>
+
                       <td>
                         <span className="text-muted">
                           {team.description || <em>No description</em>}
@@ -127,10 +126,12 @@ const Teams = () => {
                     </tr>
                   ))}
                 </tbody>
+
               </table>
             </div>
           )}
         </div>
+
       </div>
     </div>
   );

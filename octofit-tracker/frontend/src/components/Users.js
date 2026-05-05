@@ -11,15 +11,9 @@ const Users = () => {
 
   const fetchUsers = async () => {
     try {
-      const codespace =
-        process.env.REACT_APP_CODESPACE_NAME || 'localhost:3000';
-      const protocol = process.env.REACT_APP_CODESPACE_NAME
-        ? 'https'
-        : 'http';
-      const backendPort = process.env.REACT_APP_CODESPACE_NAME
-        ? '8000.app.github.dev'
-        : ':8000';
-      const apiUrl = `${protocol}://${codespace}-${backendPort}/api/users/`;
+      const apiUrl = process.env.REACT_APP_CODESPACE_NAME
+        ? `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev/api/users/`
+        : `http://localhost:8000/api/users/`;
 
       console.log('Fetching Users from:', apiUrl);
 
@@ -92,22 +86,23 @@ const Users = () => {
             </span>
           </div>
         </div>
+
         <div className="card-body">
           {users.length === 0 ? (
             <div className="alert alert-info mb-0" role="alert">
-              <strong>No users found</strong> - Currently there are no users in
-              the system.
+              <strong>No users found</strong> - Currently there are no users in the system.
             </div>
           ) : (
             <div className="table-responsive">
               <table className="table table-hover table-striped mb-0">
                 <thead className="table-light">
                   <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Username</th>
-                    <th scope="col">Email</th>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Email</th>
                   </tr>
                 </thead>
+
                 <tbody>
                   {users.map((user) => (
                     <tr key={user.id}>
@@ -116,24 +111,28 @@ const Users = () => {
                           {user.id}
                         </span>
                       </td>
+
                       <td>
-                        <strong>{user.username}</strong>
+                        <strong>{user.username || 'N/A'}</strong>
                       </td>
+
                       <td>
                         <a
-                          href={`mailto:${user.email}`}
+                          href={`mailto:${user.email || ''}`}
                           className="text-decoration-none"
                         >
-                          {user.email}
+                          {user.email || 'N/A'}
                         </a>
                       </td>
                     </tr>
                   ))}
                 </tbody>
+
               </table>
             </div>
           )}
         </div>
+
       </div>
     </div>
   );

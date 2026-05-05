@@ -13,20 +13,22 @@ const Activities = () => {
     try {
       const codespace = process.env.REACT_APP_CODESPACE_NAME || 'localhost:3000';
       const protocol = process.env.REACT_APP_CODESPACE_NAME ? 'https' : 'http';
-      const backendPort = process.env.REACT_APP_CODESPACE_NAME ? '8000.app.github.dev' : ':8000';
+      const backendPort = process.env.REACT_APP_CODESPACE_NAME
+        ? '8000.app.github.dev'
+        : ':8000';
       const apiUrl = `${protocol}://${codespace}-${backendPort}/api/activities/`;
 
       console.log('Fetching Activities from:', apiUrl);
-      
+
       const response = await fetch(apiUrl);
-      
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      
+
       const data = await response.json();
       console.log('Activities data fetched:', data);
-      
+
       // Handle both paginated responses and plain arrays
       const activitiesList = data.results || data;
       setActivities(Array.isArray(activitiesList) ? activitiesList : []);
@@ -56,9 +58,16 @@ const Activities = () => {
   if (error) {
     return (
       <div className="container mt-5">
-        <div className="alert alert-danger alert-dismissible fade show" role="alert">
+        <div
+          className="alert alert-danger alert-dismissible fade show"
+          role="alert"
+        >
           <strong>Error:</strong> {error}
-          <button type="button" className="btn-close" onClick={() => window.location.reload()}></button>
+          <button
+            type="button"
+            className="btn-close"
+            onClick={() => window.location.reload()}
+          ></button>
         </div>
       </div>
     );
@@ -67,16 +76,25 @@ const Activities = () => {
   return (
     <div className="container mt-5 mb-5">
       <div className="card">
-        <div className="card-header" style={{background: 'linear-gradient(135deg, #f97316 0%, #d97706 100%)', color: 'white'}}>
+        <div
+          className="card-header"
+          style={{
+            background: 'linear-gradient(135deg, #f97316 0%, #d97706 100%)',
+            color: 'white',
+          }}
+        >
           <div className="d-flex justify-content-between align-items-center">
             <h4 className="mb-0">📊 Activities</h4>
-            <span className="badge bg-light text-dark">{activities.length} total</span>
+            <span className="badge bg-light text-dark">
+              {activities.length} total
+            </span>
           </div>
         </div>
         <div className="card-body">
           {activities.length === 0 ? (
             <div className="alert alert-info mb-0" role="alert">
-              <strong>No activities found</strong> - Currently there are no activities in the system.
+              <strong>No activities found</strong> - Currently there are no
+              activities in the system.
             </div>
           ) : (
             <div className="table-responsive">
@@ -93,16 +111,22 @@ const Activities = () => {
                   {activities.map((activity) => (
                     <tr key={activity.id}>
                       <td>
-                        <span className="badge bg-secondary">{activity.id}</span>
+                        <span className="badge bg-secondary">
+                          {activity.id}
+                        </span>
                       </td>
                       <td>
                         <strong>{activity.activity_type || 'N/A'}</strong>
                       </td>
                       <td>
-                        <span className="badge bg-info text-dark">{activity.duration || 'N/A'}</span>
+                        <span className="badge bg-info text-dark">
+                          {activity.duration || 'N/A'}
+                        </span>
                       </td>
                       <td>
-                        <span className="badge bg-danger">{activity.calories || 'N/A'}</span>
+                        <span className="badge bg-danger">
+                          {activity.calories || 'N/A'}
+                        </span>
                       </td>
                     </tr>
                   ))}
@@ -112,8 +136,6 @@ const Activities = () => {
           )}
         </div>
       </div>
-    </div>
-  );
     </div>
   );
 };

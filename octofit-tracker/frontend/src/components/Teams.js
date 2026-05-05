@@ -11,23 +11,27 @@ const Teams = () => {
 
   const fetchTeams = async () => {
     try {
-      const codespace = process.env.REACT_APP_CODESPACE_NAME || 'localhost:3000';
-      const protocol = process.env.REACT_APP_CODESPACE_NAME ? 'https' : 'http';
-      const backendPort = process.env.REACT_APP_CODESPACE_NAME ? '8000.app.github.dev' : ':8000';
+      const codespace =
+        process.env.REACT_APP_CODESPACE_NAME || 'localhost:3000';
+      const protocol = process.env.REACT_APP_CODESPACE_NAME
+        ? 'https'
+        : 'http';
+      const backendPort = process.env.REACT_APP_CODESPACE_NAME
+        ? '8000.app.github.dev'
+        : ':8000';
       const apiUrl = `${protocol}://${codespace}-${backendPort}/api/teams/`;
 
       console.log('Fetching Teams from:', apiUrl);
-      
+
       const response = await fetch(apiUrl);
-      
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      
+
       const data = await response.json();
       console.log('Teams data fetched:', data);
-      
-      // Handle both paginated responses and plain arrays
+
       const teamsList = data.results || data;
       setTeams(Array.isArray(teamsList) ? teamsList : []);
       setLoading(false);
@@ -56,9 +60,16 @@ const Teams = () => {
   if (error) {
     return (
       <div className="container mt-5">
-        <div className="alert alert-danger alert-dismissible fade show" role="alert">
+        <div
+          className="alert alert-danger alert-dismissible fade show"
+          role="alert"
+        >
           <strong>Error:</strong> {error}
-          <button type="button" className="btn-close" onClick={() => window.location.reload()}></button>
+          <button
+            type="button"
+            className="btn-close"
+            onClick={() => window.location.reload()}
+          ></button>
         </div>
       </div>
     );
@@ -67,16 +78,25 @@ const Teams = () => {
   return (
     <div className="container mt-5 mb-5">
       <div className="card">
-        <div className="card-header" style={{background: 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)', color: 'white'}}>
+        <div
+          className="card-header"
+          style={{
+            background: 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)',
+            color: 'white',
+          }}
+        >
           <div className="d-flex justify-content-between align-items-center">
             <h4 className="mb-0">👫 Teams</h4>
-            <span className="badge bg-light text-dark">{teams.length} total</span>
+            <span className="badge bg-light text-dark">
+              {teams.length} total
+            </span>
           </div>
         </div>
         <div className="card-body">
           {teams.length === 0 ? (
             <div className="alert alert-info mb-0" role="alert">
-              <strong>No teams found</strong> - Currently there are no teams in the system.
+              <strong>No teams found</strong> - Currently there are no teams in
+              the system.
             </div>
           ) : (
             <div className="table-responsive">
@@ -92,13 +112,17 @@ const Teams = () => {
                   {teams.map((team) => (
                     <tr key={team.id}>
                       <td>
-                        <span className="badge bg-secondary">{team.id}</span>
+                        <span className="badge bg-secondary">
+                          {team.id}
+                        </span>
                       </td>
                       <td>
                         <strong>{team.name || team.team_name}</strong>
                       </td>
                       <td>
-                        <span className="text-muted">{team.description || <em>No description</em>}</span>
+                        <span className="text-muted">
+                          {team.description || <em>No description</em>}
+                        </span>
                       </td>
                     </tr>
                   ))}
